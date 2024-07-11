@@ -59,7 +59,11 @@ function Workout() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     alert(`Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!`);
+=======
+    alert('Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!');
+>>>>>>> a9ee5325f98a991d931618a0ea3eb9072b534da2
     fetch('https://api-server-vik-2.onrender.com/form', {
       method: 'POST',
       headers: {
