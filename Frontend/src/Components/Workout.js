@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+
 import Navbar from './Navbar';
 
 const activitiesList = [
@@ -12,6 +12,20 @@ const activitiesList = [
   'Stairs'
 ];
 
+const trainers = [
+  'John Doe',
+  'Jane Smith',
+  'Mike Johnson',
+  'Sarah Lee',
+  'Jessica Brown',
+  'Alex Thompson',
+  'Daniel Jones',
+  'Emily Wilson',
+  'Michael Brown',
+  'Daniel Parker',
+  
+];
+
 function Workout() {
   const [formData, setFormData] = useState({
     name: '',
@@ -19,7 +33,8 @@ function Workout() {
     address: '',
     contacts: '',
     interestedWorkout: '',
-    activities: []  // New state for selected activities
+    activities: [],
+    trainer: ''  // New state for selected trainer
   });
 
   const handleChange = (event) => {
@@ -37,9 +52,14 @@ function Workout() {
     }
   };
 
+  const handleTrainerChange = (event) => {
+    const { value } = event.target;
+    setFormData({ ...formData, trainer: value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert( 'Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!');
+    alert(`Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!`);
     fetch('https://api-server-vik-2.onrender.com/form', {
       method: 'POST',
       headers: {
@@ -58,7 +78,8 @@ function Workout() {
       address: '',
       contacts: '',
       interestedWorkout: '',
-      activities: []
+      activities: [],
+      trainer: ''
     });
   };
 
@@ -103,8 +124,13 @@ function Workout() {
             <input type="number" className="form-control" name="contacts" value={formData.contacts} onChange={handleChange} />
           </div>
           <div className="mb-3">
-            <label className="form-label">Interested Workout</label>
-            <input type="text" className="form-control" name="interestedWorkout" value={formData.interestedWorkout} onChange={handleChange} />
+            <label className="form-label">Select Trainer</label>
+            <select className="form-select" name="trainer" value={formData.trainer} onChange={handleTrainerChange} required>
+              <option value="">Select a trainer</option>
+              {trainers.map(trainer => (
+                <option key={trainer} value={trainer}>{trainer}</option>
+              ))}
+            </select>
           </div>
           <button type="submit" className="btn btn-primary m-3">Submit</button>
         </form>

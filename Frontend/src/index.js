@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Componets/Homepage';
+import Home from './Components/Homepage';
 
-import Trainer from './Componets/Trainer';
-import Workout from './Componets/Workout';
+import Trainer from './Components/Trainer';
+import Workout from './Components/Workout';
 
 
 

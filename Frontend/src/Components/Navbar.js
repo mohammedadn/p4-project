@@ -21,20 +21,12 @@ function Navbar() {
             <ul className="navbar-nav mx-auto">
               <div className=" m-5">
                 <li className="nav-item " >
-                  <Link to="/">
+                  <Link to="/home">
                     <h4>Home</h4>
 
                   </Link>
                 </li>
                 
-              </div>
-
-              <div className="m-5 ">
-                <li className="nav-item ">
-                  <Link to="/login">
-                    <h4>Login</h4>
-                  </Link>
-                </li>
               </div>
               <div className="m-5">
                 <li className="nav-item">

@@ -61,7 +61,7 @@ const trainersData = [
 ];
 
 function Trainer() {
-  const [list, setList] = useState(trainersData); // Initialize list with trainersData
+  const [list] = useState(trainersData); // Initialize list with trainersData
   const [search, setSearch] = useState('');
   const [filteredList, setFilteredList] = useState([]);
 
@@ -119,6 +119,7 @@ function Trainer() {
                   <Link to={`${trainer.id}`}>
                     <button className="btn btn-success btn-sm m-3">View trainer details</button>
                   </Link>
+                  
                 </div>
                 
                   
