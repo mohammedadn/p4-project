@@ -13,7 +13,7 @@ const activitiesList = [
 ];
 
 const trainers = [
-  'John Doe',
+  'Nara Smith',
   'Jane Smith',
   'Mike Johnson',
   'Sarah Lee',
