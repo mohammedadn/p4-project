@@ -9,7 +9,8 @@ const activitiesList = [
   'Push Ups',
   'Squats',
   'Treadmill',
-  'Stairs'
+  'Stairs',
+  'Jumping Jacks',
 ];
 
 const trainers = [
