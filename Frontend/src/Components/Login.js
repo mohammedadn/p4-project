@@ -83,134 +83,142 @@ const Login = () => {
   };
 
   return (
-    <div className="text-center">
-      {loggedIn ? (
-        <LoggedInContent username={username} handleLogout={handleLogout} />
-      ) : (
-        <div>
-          {formType === 'login' && (
-            <>
-              <h2>Login</h2>
-              <form onSubmit={handleFormSubmit}>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <input
-                      type="text"
-                      className="form-control mb-3"
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </div>
+    <div 
+    className="d-flex justify-content-center align-items-center"
+    style={{
+      backgroundImage: 'url(https://i.pinimg.com/originals/f6/32/2f/f6322faf9e6ec6aade3bfd55588bc443.jpg)',
+      backgroundSize: 'cover',
+      height: '100vh',
+      width: '100vw',
+      backgroundPosition: 'center',
+    }}
+  >
+    {loggedIn ? (
+      <LoggedInContent username={username} handleLogout={handleLogout} />
+    ) : (
+      <div className="card p-4" style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '10px'}}>
+        {formType === 'login' && (
+          <>
+            <h2>Login</h2>
+            <form onSubmit={handleFormSubmit}>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <input
+                    type="text"
+                    className="form-control mb-3"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <input
-                      type="password"
-                      className="form-control mb-3"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <input
+                    type="password"
+                    className="form-control mb-3"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <button className="btn btn-primary me-2" type="submit">
-                      Login
-                    </button>
-                    <button
-                      className="btn btn-success"
-                      type="button"
-                      onClick={handleFormSwitch}
-                    >
-                      Switch to Sign Up
-                    </button>
-                  </div>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <button className="btn btn-primary me-2" type="submit">
+                    Login
+                  </button>
+                  <button
+                    className="btn btn-success"
+                    type="button"
+                    onClick={handleFormSwitch}
+                  >
+                    Switch to Sign Up
+                  </button>
                 </div>
-                {error && (
-                  <div className="alert alert-danger mt-3">{error}</div>
-                )}
-              </form>
-            </>
-          )}
-          {formType === 'signup' && (
-            <>
-              <h2>Sign Up</h2>
-              <form onSubmit={handleFormSubmit}>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <input
-                      type="text"
-                      className="form-control mb-3"
-                      placeholder="Username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </div>
+              </div>
+              {error && (
+                <div className="alert alert-danger mt-3">{error}</div>
+              )}
+            </form>
+          </>
+        )}
+        {formType === 'signup' && (
+          <>
+            <h2>Sign Up</h2>
+            <form onSubmit={handleFormSubmit}>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <input
+                    type="text"
+                    className="form-control mb-3"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <input
-                      type="password"
-                      className="form-control mb-3"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <input
+                    type="password"
+                    className="form-control mb-3"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <input
-                      type="text"
-                      className="form-control mb-3"
-                      placeholder="Email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <input
+                    type="text"
+                    className="form-control mb-3"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
-                <div className="row justify-content-center">
-                  <div className="col-sm-6">
-                    <button className="btn btn-success me-2" type="submit">
-                      Sign Up
-                    </button>
-                    <button
-                      className="btn btn-primary"
-                      type="button"
-                      onClick={handleFormSwitch}
-                    >
-                      Switch to Login
-                    </button>
-                  </div>
+              </div>
+              <div className="row justify-content-center">
+                <div className="col-sm-6">
+                  <button className="btn btn-success me-2" type="submit">
+                    Sign Up
+                  </button>
+                  <button
+                    className="btn btn-primary"
+                    type="button"
+                    onClick={handleFormSwitch}
+                  >
+                    Switch to Login
+                  </button>
                 </div>
-                {error && (
-                  <div className="alert alert-danger mt-3">{error}</div>
-                )}
-              </form>
-            </>
-          )}
-        </div>
-      )}
-    </div>
-  );
+              </div>
+              {error && (
+                <div className="alert alert-danger mt-3">{error}</div>
+              )}
+            </form>
+          </>
+        )}
+      </div>
+    )}
+  </div>
+);
 };
 
 function LoggedInContent({ username, handleLogout }) {
   return (
     <>
-      <h2>Welcome, {username}!</h2>
+      <h2 style={{ color: 'white' }}>Welcome, {username}!</h2>
       
       <button className="btn btn-danger" onClick={handleLogout}>
         Logout
       </button>
-      <Link to="/home">Home</Link>
       
-      
-
+      <Link to="/home" style={{ color: 'white', marginLeft: '10px' }}>Home</Link>
     </>
   );
 }
+
 
 export default Login;

@@ -1,39 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Navbar from './Navbar';
 
-const activitiesList = [
-  'Wide-grip standing barbell curl',
-  'Incline Dumbbell Hammer Curl',
-  'Bench press',
-  'Push Ups',
-  'Squats',
-  'Treadmill',
-  'Stairs',
-  'Jumping Jacks',
-];
+
 
 const trainers = [
-  'Nara Smith',
   'Jane Smith',
-  'Mike Johnson',
-  'Sarah Lee',
-  'Jessica Brown',
+  'John Doe',
+  'Shaqs Dickie',
+  'Michael Brown',
   'Alex Thompson',
   'Daniel Jones',
   'Emily Wilson',
-  'Michael Brown',
-  'Daniel Parker',
+  'Jessica Brown',
+  'Lynnelle Parker',
+  'Washington Brown',
   
 ];
 
 function Workout() {
+  const [activities,setActivities]=useState([])
+  useEffect(()=>{
+    fetch("http://127.0.0.1:5000/api/activities")
+     .then(response => response.json())
+     .then(data => setActivities(data))
+     .catch(error => console.error('Error fetching workouts:', error));
+  },[])
+  console.log(activities)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     address: '',
     contacts: '',
-    interestedWorkout: '',
     activities: [],
     trainer: ''  // New state for selected trainer
   });
@@ -61,7 +59,7 @@ function Workout() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!`);
-    fetch('https://api-server-vik-2.onrender.com/form', {
+    fetch('http://127.0.0.1:5000/api/workouts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -78,7 +76,6 @@ function Workout() {
       email: '',
       address: '',
       contacts: '',
-      interestedWorkout: '',
       activities: [],
       trainer: ''
     });
@@ -89,19 +86,19 @@ function Workout() {
       <Navbar />
       <hr></hr>
       <div className="container bg-secondary m-8 p-4">
-        <h2 className="text-center fw-bold">Select Workout</h2>
+        <h2 className="text-center fw-bold">Select Activity</h2>
         <div className="mb-3">
-          {activitiesList.map(activity => (
+          {activities.map(activity => (
             <div key={activity} className="form-check">
               <input
                 type="checkbox"
                 className="form-check-input"
-                id={activity}
-                value={activity}
-                checked={formData.activities.includes(activity)}
+                id={activity.id}
+                value={activity.name}
+                checked={formData.activities.includes(activity.name)}
                 onChange={handleActivityChange}
               />
-              <label className="form-check-label" htmlFor={activity}>{activity}</label>
+              <label className="form-check-label" htmlFor={activity.name}>{activity.name}</label>
             </div>
           ))}
         </div>
@@ -122,7 +119,7 @@ function Workout() {
           </div>
           <div className="mb-3">
             <label className="form-label">Contact Information</label>
-            <input type="number" className="form-control" name="contacts" value={formData.contacts} onChange={handleChange} />
+            <input type="text" className="form-control" name="contacts" value={formData.contacts} onChange={handleChange} />
           </div>
           <div className="mb-3">
             <label className="form-label">Select Trainer</label>
