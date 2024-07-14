@@ -133,7 +133,7 @@ const Login = () => {
                     type="button"
                     onClick={handleFormSwitch}
                   >
-                    Switch to Sign Up
+                    Sign Up
                   </button>
                 </div>
               </div>
@@ -190,7 +190,7 @@ const Login = () => {
                     type="button"
                     onClick={handleFormSwitch}
                   >
-                    Switch to Login
+                    Login
                   </button>
                 </div>
               </div>
