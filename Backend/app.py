@@ -9,7 +9,7 @@ CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x2a\x10K'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fitness.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.json.compact = False
+
 
 migrate = Migrate(app, db)
 db.init_app(app)
@@ -119,6 +119,9 @@ def get_trackers():
 def create_tracker():
     data = request.get_json()
     meal = data.get('meal')
+    hours_training = data.get('hours_training')
+    weight = data.get('weight')
+    water_intake = data.get('water_intake')
     gym_visit_date_str = data.get('gym_visit_date')  # Assuming gym_visit_date is provided as string 'YYYY-MM-DD'
     user_id = data.get('user_id')
     
@@ -129,6 +132,9 @@ def create_tracker():
     
     tracker = Tracker(
         meal=meal,
+        hours_training=hours_training,
+        weight=weight,
+        water_intake=water_intake,
         gym_visit_date=gym_visit_date,
         user_id=user_id
     )

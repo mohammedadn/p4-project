@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from faker import Faker
 from app import app, db, User, Workout, Trainer, Activity, Tracker
-from datetime import datetime, date
+from datetime import date
 
 # Initialize Faker (optional, for generating fake data)
 fake = Faker()
@@ -129,11 +129,11 @@ def seed_data():
             activity = Activity(name=activity_name)
             db.session.add(activity)
 
-        # Seed trackers
-        tracker1 = Tracker(meal='Salad', user_id=user1.id)
-        tracker2 = Tracker(gym_visit_date=date(2023, 7, 1), user_id=user1.id)
-        tracker3 = Tracker(meal='Chicken', user_id=user2.id)
-        tracker4 = Tracker(gym_visit_date=date(2023, 7, 2), user_id=user2.id)
+        # Seed trackers with additional fields
+        tracker1 = Tracker(meal='Salad', hours_training=1.5, weight=75.0, water_intake=1.0, user_id=user1.id)
+        tracker2 = Tracker(gym_visit_date=date(2023, 7, 1), hours_training=2.0, weight=70.0, water_intake=0.5, user_id=user1.id)
+        tracker3 = Tracker(meal='Chicken', hours_training=1.0, weight=65.0, water_intake=0.8, user_id=user2.id)
+        tracker4 = Tracker(gym_visit_date=date(2023, 7, 2), hours_training=1.5, weight=68.0, water_intake=0.7, user_id=user2.id)
 
         db.session.add_all([tracker1, tracker2, tracker3, tracker4])
         db.session.commit()

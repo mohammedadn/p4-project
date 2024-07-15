@@ -60,7 +60,10 @@ class Tracker(db.Model):
     __tablename__ = 'trackers'
     id = db.Column(db.Integer, primary_key=True)
     meal = db.Column(db.String(64))
-    gym_visit_date = db.Column(db.Date)  # Define gym_visit_date as Date type
+    gym_visit_date = db.Column(db.Date)
+    hours_training = db.Column(db.Float)  # Added field for hours of training
+    weight = db.Column(db.Float)  # Added field for weight
+    water_intake = db.Column(db.Float)  # Added field for water intake
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     def __repr__(self):
@@ -71,6 +74,9 @@ class Tracker(db.Model):
             'id': self.id,
             'meal': self.meal,
             'gym_visit_date': self.gym_visit_date.strftime('%Y-%m-%d') if self.gym_visit_date else None,
+            'hours_training': self.hours_training,
+            'weight': self.weight,
+            'water_intake': self.water_intake,
             'user_id': self.user_id
         }
 
