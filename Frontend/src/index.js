@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './Components/Homepage';
-
+import Tracker from './Components/Tracker';
 import Trainer from './Components/Trainer';
 import Workout from './Components/Workout';
 
@@ -31,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: '/workout',
     element: <Workout />,
+  },
+  {
+    path: '/tracker',
+    element: <Tracker/>,
   },
 
   

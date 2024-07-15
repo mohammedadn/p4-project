@@ -9,7 +9,7 @@ import Navbar from './Navbar';
 function Trainer() {
   const [list,setList] = useState([]);
   useEffect(()=>{
-    fetch("http://127.0.0.1:5000/api/trainers")
+    fetch("http://127.0.0.1:5500/api/trainers")
      .then(response => response.json())
      .then(data => setList(data))
      .catch(error => console.error('Error fetching trainers:', error));

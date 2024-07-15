@@ -21,7 +21,7 @@ const trainers = [
 function Workout() {
   const [activities,setActivities]=useState([])
   useEffect(()=>{
-    fetch("http://127.0.0.1:5000/api/activities")
+    fetch("http://127.0.0.1:5500/api/activities")
      .then(response => response.json())
      .then(data => setActivities(data))
      .catch(error => console.error('Error fetching workouts:', error));
@@ -59,7 +59,7 @@ function Workout() {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(`Your form has been submitted successfully. Thank you for choosing Fitness tracker. Our team will reach out to you shortly. Asante Sana!`);
-    fetch('http://127.0.0.1:5000/api/workouts', {
+    fetch('http://127.0.0.1:5500/api/workouts', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

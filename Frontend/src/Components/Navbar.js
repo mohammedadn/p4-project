@@ -42,6 +42,13 @@ function Navbar() {
                   </Link>
               </li>
               </div> 
+              <div className="m-5">
+                <li className="nav-item">
+                  <Link to="/tracker">
+                    <h4>Tracker</h4>
+                  </Link>
+              </li>
+              </div> 
             </ul>
           </div>
         </div>
