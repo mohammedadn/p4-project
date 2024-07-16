@@ -1,6 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 
+import Navbar from './Navbar';
+
 const Tracker = () => {
   const [meal, setMeal] = useState('');
   const [meals, setMeals] = useState([]);
@@ -332,41 +334,36 @@ const handleDeleteWaterIntake = async (id) => {
   }
 };
 
-return (
-  <div className="container mt-5">
-    <h1>Tracker</h1>
+  return (
+    <div className="container mt-5">
+      <h1>Tracker</h1>
 
-    {/* Track Meals */}
-    <div className="card mt-3">
-      <div className="card-body">
-        <h2>Track Meals</h2>
-        <form onSubmit={handleAddMeal}>
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter meal"
-              value={meal}
-              onChange={(e) => setMeal(e.target.value)}
-            />
-            <button className="btn btn-primary" type="submit">Add Meal</button>
-          </div>
-        </form>
-        <ul className="list-group">
-          {meals.map((m) => (
-            <li key={m.id} className="list-group-item d-flex justify-content-between align-items-center">
-              {m.meal}
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={() => handleDeleteMeal(m.id)}
-              >
-                Delete
+      <div className="card mt-3">
+        <div className="card-body">
+          <h2>Track Meals</h2>
+          <form onSubmit={handleAddMeal}>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Enter meal"
+                value={meal}
+                onChange={(e) => setMeal(e.target.value)}
+              />
+              <button className="btn btn-primary" type="submit">
+                Add Meal
               </button>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </form>
+          <ul className="list-group">
+            {meals.map((meal, index) => (
+              <li key={index} className="list-group-item">
+                {meal}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
 
     {/* Track Gym Visits */}
     <div className="card mt-3">
@@ -464,39 +461,34 @@ return (
       </div>
     </div>
 
-    {/* Track Water Intake */}
-    <div className="card mt-3">
-      <div className="card-body">
-        <h2>Track Water Intake</h2>
-        <form onSubmit={handleAddWaterIntake}>
-          <div className="input-group mb-3">
-            <input
-              type="number"
-              className="form-control"
-              placeholder="Enter water intake"
-              value={waterIntake}
-              onChange={(e) => setWaterIntake(e.target.value)}
-            />
-            <button className="btn btn-primary" type="submit">Add Water Intake</button>
-          </div>
-        </form>
-        <ul className="list-group">
-          {waterIntakes.map((water) => (
-            <li key={water.id} className="list-group-item d-flex justify-content-between align-items-center">
-              {water.water} liters
-              <button
-                className="btn btn-danger btn-sm"
-                onClick={() => handleDeleteWaterIntake(water.id)}
-              >
-                Delete
+      <div className="card mt-3">
+        <div className="card-body">
+          <h2>Track Water Intake</h2>
+          <form onSubmit={handleAddWaterIntake}>
+            <div className="input-group mb-3">
+              <input
+                type="number"
+                className="form-control"
+                placeholder="Enter water intake"
+                value={waterIntake}
+                onChange={(e) => setWaterIntake(e.target.value)}
+              />
+              <button className="btn btn-primary" type="submit">
+                Add Water Intake
               </button>
-            </li>
-          ))}
-        </ul>
+            </div>
+          </form>
+          <ul className="list-group">
+            {waterIntakes.map((water, index) => (
+              <li key={index} className="list-group-item">
+                {water} liters
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default Tracker;

@@ -44,9 +44,9 @@ function Trainer() {
   }, [search, list]);
 
   return (
-    <div>
+    <div className='tracker-body'>
       <Navbar />
-      <div className="container m-3 p-3">
+      <div className="container">
         <div className="m-2 p-3">
           <input
             onChange={handleSearch}

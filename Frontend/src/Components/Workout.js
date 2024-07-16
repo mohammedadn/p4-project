@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
 import Navbar from './Navbar';
-
-
 
 const trainers = [
   'Jane Smith',
@@ -15,17 +12,16 @@ const trainers = [
   'Jessica Brown',
   'Lynnelle Parker',
   'Washington Brown',
-  
 ];
 
 function Workout() {
-  const [activities,setActivities]=useState([])
-  useEffect(()=>{
+  const [activities, setActivities] = useState([]);
+  useEffect(() => {
     fetch("http://127.0.0.1:5500/api/activities")
-     .then(response => response.json())
-     .then(data => setActivities(data))
-     .catch(error => console.error('Error fetching workouts:', error));
-  },[])
+      .then(response => response.json())
+      .then(data => setActivities(data))
+      .catch(error => console.error('Error fetching workouts:', error));
+  }, []);
   console.log(activities)
   const [formData, setFormData] = useState({
     name: '',
@@ -82,11 +78,11 @@ function Workout() {
   };
 
   return (
-    <div>
+    <div className='tracker-body'>
       <Navbar />
       <hr></hr>
       <div className="container bg-secondary m-8 p-4">
-        <h2 className="text-center fw-bold">Select Activity</h2>
+        <h2 className="text-center fw-bold" style={{ color: 'white' }}>Select Activity</h2>
         <div className="mb-3">
           {activities.map(activity => (
             <div key={activity} className="form-check">
@@ -98,31 +94,31 @@ function Workout() {
                 checked={formData.activities.includes(activity.name)}
                 onChange={handleActivityChange}
               />
-              <label className="form-check-label" htmlFor={activity.name}>{activity.name}</label>
+              <label className="form-check-label" htmlFor={activity.name} style={{ color: 'white' }}>{activity.name}</label>
             </div>
           ))}
         </div>
         <hr></hr>
-        <h2 className="text-center fw-bold">Fill in Form</h2>
+        <h2 className="text-center fw-bold" style={{ color: 'white' }}>Fill in Form</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label className="form-label">Name</label>
+            <label className="form-label" style={{ color: 'white' }}>Name</label>
             <input type="text" className="form-control" name="name" value={formData.name} onChange={handleChange} required />
           </div>
           <div className="mb-3">
-            <label className="form-label">Email Address</label>
+            <label className="form-label" style={{ color: 'white' }}>Email Address</label>
             <input type="email" className="form-control" name="email" value={formData.email} onChange={handleChange} required />
           </div>
           <div className="mb-3">
-            <label className="form-label">Address</label>
+            <label className="form-label" style={{ color: 'white' }}>Address</label>
             <input type="text" className="form-control" name="address" value={formData.address} onChange={handleChange} />
           </div>
           <div className="mb-3">
-            <label className="form-label">Contact Information</label>
+            <label className="form-label" style={{ color: 'white' }}>Contact Information</label>
             <input type="text" className="form-control" name="contacts" value={formData.contacts} onChange={handleChange} />
           </div>
           <div className="mb-3">
-            <label className="form-label">Select Trainer</label>
+            <label className="form-label" style={{ color: 'white' }}>Select Trainer</label>
             <select className="form-select" name="trainer" value={formData.trainer} onChange={handleTrainerChange} required>
               <option value="">Select a trainer</option>
               {trainers.map(trainer => (

@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <div>
 
-      <nav className="navbar navbar-expand-lg bg-dark navbar-dark m-3 ">
+      <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <h1 className="text-bold text-primary m-2">
           <img src={"https://i.pinimg.com/originals/a5/fb/c9/a5fbc944a9738597d3db5060e7a077ee.jpg"} width="200" height="150" className="d-inline-block align-top" alt=""></img>

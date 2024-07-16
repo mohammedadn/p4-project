@@ -1,0 +1,139 @@
+.Home{
+    background-image: linear-gradient(to bottom right, #89CFF0, rgba(255, 255, 0, 0.555),#89CFF0,#89CFF0);
+
+}
+.left-r{
+    
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 1rem;
+    
+    
+}
+h12{
+    color: transparent;
+    font-size:50px;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(109, 109, 109);
+
+
+}
+
+.image-collage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap:0;
+    
+  }
+  .image-collage img { 
+    width: 100% ; 
+    height: auto; 
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+
+  }
+  .right-r{
+    margin-left: 10px;
+    height: 600px;
+    background-image: linear-gradient(to bottom right, #1f2224, rgba(228, 228, 111, 0.555),#c9d8df,#89CFF0);
+    
+
+}
+h3{
+    text-align: center;
+}
+h4{
+    margin-left: 200px;
+}
+.heartrate{
+    display:flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgb(0, 0, 0);
+    box-shadow: 0 0 10px rgba(176, 189, 5, 0.342);
+    width: fit-content;
+    padding: 40px;
+    align-items: start;
+    border-radius: 9px;
+    position: absolute;
+    right: 66px;
+    top: 126px;
+}
+
+.heartrate :nth-child(1){
+    width: 36px;
+}
+
+.heartrate :nth-child(2){
+    color: white;
+  
+}
+
+.heartrate :nth-child(3){
+    color: white;
+    font-size: 24px;
+}
+
+.paragraph{
+    font-size: 35px;
+    line-height: 70px;
+    font-weight: bold;
+    margin-left: 30px;
+    text-transform: uppercase;}
+
+.footer{
+    background-image: linear-gradient(90deg, black,rgb(66, 66, 66) ,black);
+    color: whitesmoke;
+    margin-top: 20px;
+    
+}
+.col-md-41{
+    text-align: left;
+    
+
+}
+h5{
+    font-size: 30px;
+}
+h6{
+    font-size: 30px;
+}
+h8{
+    font-size: 30px;
+}
+.col-md-42{
+    text-align: right;
+    margin-right: 40px;
+}  
+
+#num li{
+    list-style: circle;
+    
+
+}
+.col-md-43{
+    text-align: right;
+    margin-right: 40px;
+}
+
+.centerFooter{
+    align-items: center;
+    text-align: center;
+
+}
+.icons{
+    font-size: 30px;
+    margin-left: 10px;
+}
+h10{
+    font-size: 30px;
+}
+.intro{
+    background-color: rgba(61, 60, 60, 0.397);
+    border-radius: 10px;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    padding: 20px;
+}
