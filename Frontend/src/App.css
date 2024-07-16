@@ -129,7 +129,15 @@
 
 }
 
-.list-group{
+.list-group-item{
     border: 1px solid black;
+
+}
+
+.list-group-item:hover{
+    background-color: rgba(153, 153, 153, 0.5);
+}
+.list-group{
+    border: 2px dotted black;
 
 }
