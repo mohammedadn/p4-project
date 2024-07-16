@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import Navbar from './Navbar';
+
 const Tracker = () => {
   const [meal, setMeal] = useState('');
   const [meals, setMeals] = useState([]);
@@ -245,10 +247,17 @@ const Tracker = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h1>Tracker</h1>
+   
+    <div className='tracker-body'>
+     <Navbar/>
+    
+    <div className="container ">
+      
+      <h1 style={{ fontSize: '24px', color: 'white', fontWeight: 'bold',  textAlign: 'center' }}>Tracker</h1>
 
-      <div className="card mt-3">
+
+      <div className="card mt-5">
+        
         <div className="card-body">
           <h2>Track Meals</h2>
           <form onSubmit={handleAddMeal}>
@@ -382,6 +391,8 @@ const Tracker = () => {
           </ul>
         </div>
       </div>
+    </div>
+
     </div>
   );
 };

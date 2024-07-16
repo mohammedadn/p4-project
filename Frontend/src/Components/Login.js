@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import NumberCounter from 'number-counter'
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -100,7 +101,7 @@ const Login = () => {
       {loggedIn ? (
         <LoggedInContent username={username} handleLogout={handleLogout} />
       ) : (
-        <div className="card p-4" style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '10px'}}>
+        <div className="card p-4 " style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '10px', width: '700px', height: '400px'}}>
           {formType === 'login' && (
             <>
               <h2>Login</h2>
@@ -158,6 +159,7 @@ const Login = () => {
                       className="form-control mb-3"
                       placeholder="Username"
                       value={username}
+
                       onChange={(e) => setUsername(e.target.value)}
                     />
                   </div>
@@ -189,7 +191,7 @@ const Login = () => {
                     <input
                       type="text"
                       className="form-control mb-3"
-                      placeholder="Contacts"
+                      placeholder="Contacts order (xxx-xxx-xxx)"
                       value={contacts}
                       onChange={(e) => setContacts(e.target.value)}
                     />
@@ -235,13 +237,33 @@ const Login = () => {
 function LoggedInContent({ username, handleLogout }) {
   return (
     <>
-      <h2 style={{ color: 'white' }}>Welcome, {username}!</h2>
-      
-      <button className="btn btn-danger" onClick={handleLogout}>
+    <div className='welcome'>
+      <h2 className='stroketext'>Welcome,</h2><h3 className='stroketext2'> {username}!</h3>
+     <div className='home'> <Link to="/home" >Home</Link></div>
+
+      <button className="btn-btn-danger" onClick={handleLogout}>
         Logout
       </button>
+     
+    </div>
       
-      <Link to="/home" style={{ color: 'white', marginLeft: '10px' }}>Home</Link>
+      
+                
+                <div className='figures'>
+                    <div>
+                        <span><NumberCounter end={180} start={110} delay='7' preFix="+"/></span>
+                        <span>Expert coaches</span>
+                    </div>
+                    <div>
+                        <span><NumberCounter end={1400} start={1000} delay='7' preFix="+"/></span>
+                        <span>Members Joined</span>
+                    </div>
+                    <div>
+                        <span><NumberCounter end={80} start={20} delay='7' preFix="+"/></span>
+                        <span>Fitness Programs</span>
+                    </div>
+
+                </div>
     </>
   );
 }
