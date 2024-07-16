@@ -101,7 +101,7 @@ const Login = () => {
       {loggedIn ? (
         <LoggedInContent username={username} handleLogout={handleLogout} />
       ) : (
-        <div className="card p-4 " style={{backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '10px', width: '700px', height: '400px'}}>
+        <div className="card p-4 " style={{backgroundColor: 'rgba(255, 230, 220, 0.8)', borderRadius: '10px', width: '800px', height: '600px'}}>
           {formType === 'login' && (
             <>
               <h2>Login</h2>
