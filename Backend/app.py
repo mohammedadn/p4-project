@@ -5,11 +5,10 @@ from models import *
 from datetime import datetime
 
 app = Flask(__name__)
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:3001"}})
 app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x2a\x10K'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fitness.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 
 migrate = Migrate(app, db)
 db.init_app(app)
@@ -122,7 +121,7 @@ def create_tracker():
     hours_training = data.get('hours_training')
     weight = data.get('weight')
     water_intake = data.get('water_intake')
-    gym_visit_date_str = data.get('gym_visit_date')  # Assuming gym_visit_date is provided as string 'YYYY-MM-DD'
+    gym_visit_date_str = data.get('gym_visit_date')
     user_id = data.get('user_id')
     
     if gym_visit_date_str:
@@ -143,6 +142,17 @@ def create_tracker():
     db.session.commit()
     
     return jsonify({'success': True, 'message': 'Tracker created successfully'}), 201
+
+@app.route('/api/trackers/<int:id>', methods=['DELETE'])
+def delete_tracker(id):
+    tracker = Tracker.query.get(id)
+    if tracker is None:
+        return jsonify({'success': False, 'message': 'Tracker not found'}), 404
+    
+    db.session.delete(tracker)
+    db.session.commit()
+    
+    return jsonify({'success': True, 'message': 'Tracker deleted successfully'}), 200
 
 if __name__ == '__main__':
     app.run(port=5500, debug=True)

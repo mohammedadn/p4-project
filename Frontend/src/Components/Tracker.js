@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 import Navbar from './Navbar';
@@ -32,7 +33,7 @@ const Tracker = () => {
       const response = await fetch(`http://localhost:5500/api/trackers?user_id=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setMeals(data.map(entry => entry.meal));
+        setMeals(data.filter(entry => entry.meal).map(entry => ({ id: entry.id, meal: entry.meal })));
       } else {
         console.error('Failed to fetch meals:', response.statusText);
       }
@@ -47,7 +48,7 @@ const Tracker = () => {
       const response = await fetch(`http://localhost:5500/api/trackers?user_id=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setGymVisits(data.map(entry => ({ id: entry.id, date: entry.gym_visit_date })));
+        setGymVisits(data.filter(entry => entry.gym_visit_date).map(entry => ({ id: entry.id, date: entry.gym_visit_date })));
       } else {
         console.error('Failed to fetch gym visits:', response.statusText);
       }
@@ -62,7 +63,7 @@ const Tracker = () => {
       const response = await fetch(`http://localhost:5500/api/trackers?user_id=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setHoursTrainings(data.map(entry => entry.hours_training));
+        setHoursTrainings(data.filter(entry => entry.hours_training).map(entry => ({ id: entry.id, hours: entry.hours_training })));
       } else {
         console.error('Failed to fetch hours of training:', response.statusText);
       }
@@ -77,7 +78,7 @@ const Tracker = () => {
       const response = await fetch(`http://localhost:5500/api/trackers?user_id=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setWeights(data.map(entry => entry.weight));
+        setWeights(data.filter(entry => entry.weight).map(entry => ({ id: entry.id, weight: entry.weight })));
       } else {
         console.error('Failed to fetch weight:', response.statusText);
       }
@@ -92,7 +93,7 @@ const Tracker = () => {
       const response = await fetch(`http://localhost:5500/api/trackers?user_id=${userId}`);
       if (response.ok) {
         const data = await response.json();
-        setWaterIntakes(data.map(entry => entry.water_intake));
+        setWaterIntakes(data.filter(entry => entry.water_intake).map(entry => ({ id: entry.id, water: entry.water_intake })));
       } else {
         console.error('Failed to fetch water intake:', response.statusText);
       }
@@ -119,7 +120,7 @@ const Tracker = () => {
         if (response.ok) {
           const result = await response.json();
           console.log('Meal added successfully:', result);
-          setMeals([...meals, meal]);
+          setMeals([...meals, { id: result.id, meal }]);
           setMeal('');
         } else {
           console.error('Failed to add meal:', response.statusText);
@@ -127,6 +128,24 @@ const Tracker = () => {
       } catch (error) {
         console.error('Error adding meal:', error.message);
       }
+    }
+  };
+
+  // Handle deleting a meal
+  const handleDeleteMeal = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        console.log('Meal deleted successfully');
+        setMeals(meals.filter(meal => meal.id !== id));
+      } else {
+        console.error('Failed to delete meal:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting meal:', error);
     }
   };
 
@@ -159,6 +178,24 @@ const Tracker = () => {
     }
   };
 
+  // Handle deleting a gym visit
+  const handleDeleteGymVisit = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        console.log('Gym visit deleted successfully');
+        setGymVisits(gymVisits.filter(visit => visit.id !== id));
+      } else {
+        console.error('Failed to delete gym visit:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting gym visit:', error);
+    }
+  };
+
   // Handle adding hours of training
   const handleAddHoursTraining = async (e) => {
     e.preventDefault();
@@ -177,7 +214,7 @@ const Tracker = () => {
         if (response.ok) {
           const result = await response.json();
           console.log('Hours of training added successfully:', result);
-          setHoursTrainings([...hoursTrainings, parseFloat(hoursTraining)]);
+          setHoursTrainings([...hoursTrainings, { id: result.id, hours: parseFloat(hoursTraining) }]);
           setHoursTraining('');
         } else {
           console.error('Failed to add hours of training:', response.statusText);
@@ -185,6 +222,24 @@ const Tracker = () => {
       } catch (error) {
         console.error('Error adding hours of training:', error.message);
       }
+    }
+  };
+
+  // Handle deleting hours of training
+  const handleDeleteHoursTraining = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        console.log('Hours of training deleted successfully');
+        setHoursTrainings(hoursTrainings.filter(hours => hours.id !== id));
+      } else {
+        console.error('Failed to delete hours of training:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting hours of training:', error);
     }
   };
 
@@ -205,8 +260,7 @@ const Tracker = () => {
 
         if (response.ok) {
           const result = await response.json();
-          console.log('Weight added successfully:', result);
-          setWeights([...weights, parseFloat(weight)]);
+          setWeights([...weights, { id: result.id, weight: parseFloat(weight) }]);
           setWeight('');
         } else {
           console.error('Failed to add weight:', response.statusText);
@@ -217,47 +271,74 @@ const Tracker = () => {
     }
   };
 
-  // Handle adding water intake
-  const handleAddWaterIntake = async (e) => {
-    e.preventDefault();
-    if (waterIntake) {
-      const data = { water_intake: parseFloat(waterIntake), user_id: userId };
+  const handleDeleteWeight = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+        method: 'DELETE'
+      });
 
-      try {
-        const response = await fetch('http://localhost:5500/api/trackers', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          const result = await response.json();
-          console.log('Water intake added successfully:', result);
-          setWaterIntakes([...waterIntakes, parseFloat(waterIntake)]);
-          setWaterIntake('');
-        } else {
-          console.error('Failed to add water intake:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error adding water intake:', error.message);
+      if (response.ok) {
+        setWeights(weights.filter(weight => weight.id !== id));
+      } else {
+        console.error('Failed to delete weight:', response.statusText);
       }
+    } catch (error) {
+      console.error('Error deleting weight:', error);
     }
   };
 
+  // Handle adding water intake
+const handleAddWaterIntake = async (e) => {
+  e.preventDefault();
+  if (waterIntake) {
+    const data = { water_intake: parseFloat(waterIntake), user_id: userId };
+
+    try {
+      const response = await fetch('http://localhost:5500/api/trackers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Water intake added successfully:', result);
+        setWaterIntakes([...waterIntakes, { id: result.id, water: parseFloat(waterIntake) }]);
+        setWaterIntake('');
+      } else {
+        console.error('Failed to add water intake:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error adding water intake:', error.message);
+    }
+  }
+};
+
+// Handle deleting water intake
+const handleDeleteWaterIntake = async (id) => {
+  try {
+    const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (response.ok) {
+      console.log('Water intake deleted successfully');
+      setWaterIntakes(waterIntakes.filter(intake => intake.id !== id));
+    } else {
+      console.error('Failed to delete water intake:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error deleting water intake:', error);
+  }
+};
+
   return (
-   
-    <div className='tracker-body'>
-     <Navbar/>
-    
-    <div className="container ">
-      
-      <h1 style={{ fontSize: '24px', color: 'white', fontWeight: 'bold',  textAlign: 'center' }}>Tracker</h1>
+    <div className="container mt-5">
+      <h1>Tracker</h1>
 
-
-      <div className="card mt-5">
-        
+      <div className="card mt-3">
         <div className="card-body">
           <h2>Track Meals</h2>
           <form onSubmit={handleAddMeal}>
@@ -284,86 +365,101 @@ const Tracker = () => {
         </div>
       </div>
 
-      <div className="card mt-3">
-        <div className="card-body">
-          <h2>Track Gym Visits</h2>
-          <form onSubmit={handleAddGymVisit}>
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Enter gym visit date"
-                value={gymVisit}
-                onChange={(e) => setGymVisit(e.target.value)}
-              />
-              <button className="btn btn-primary" type="submit">
-                Add Gym Visit
+    {/* Track Gym Visits */}
+    <div className="card mt-3">
+      <div className="card-body">
+        <h2>Track Gym Visits</h2>
+        <form onSubmit={handleAddGymVisit}>
+          <div className="input-group mb-3">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter gym visit date"
+              value={gymVisit}
+              onChange={(e) => setGymVisit(e.target.value)}
+            />
+            <button className="btn btn-primary" type="submit">Add Gym Visit</button>
+          </div>
+        </form>
+        <ul className="list-group">
+          {gymVisits.map((visit) => (
+            <li key={visit.id} className="list-group-item d-flex justify-content-between align-items-center">
+              {visit.date}
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDeleteGymVisit(visit.id)}
+              >
+                Delete
               </button>
-            </div>
-          </form>
-          <ul className="list-group">
-            {gymVisits.map((visit, index) => (
-              <li key={index} className="list-group-item">
-                {visit.date}
-              </li>
-            ))}
-          </ul>
-        </div>
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
 
-      <div className="card mt-3">
-        <div className="card-body">
-          <h2>Track Hours of Training</h2>
-          <form onSubmit={handleAddHoursTraining}>
-            <div className="input-group mb-3">
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Enter hours of training"
-                value={hoursTraining}
-                onChange={(e) => setHoursTraining(e.target.value)}
-              />
-              <button className="btn btn-primary" type="submit">
-                Add Hours of Training
+    {/* Track Hours of Training */}
+    <div className="card mt-3">
+      <div className="card-body">
+        <h2>Track Hours of Training</h2>
+        <form onSubmit={handleAddHoursTraining}>
+          <div className="input-group mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Enter hours of training"
+              value={hoursTraining}
+              onChange={(e) => setHoursTraining(e.target.value)}
+            />
+            <button className="btn btn-primary" type="submit">Add Hours of Training</button>
+          </div>
+        </form>
+        <ul className="list-group">
+          {hoursTrainings.map((hours) => (
+            <li key={hours.id} className="list-group-item d-flex justify-content-between align-items-center">
+              {hours.hours} hours
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDeleteHoursTraining(hours.id)}
+              >
+                Delete
               </button>
-            </div>
-          </form>
-          <ul className="list-group">
-            {hoursTrainings.map((hours, index) => (
-              <li key={index} className="list-group-item">
-                {hours} hours
-              </li>
-            ))}
-          </ul>
-        </div>
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
 
-      <div className="card mt-3">
-        <div className="card-body">
-          <h2>Track Weight</h2>
-          <form onSubmit={handleAddWeight}>
-            <div className="input-group mb-3">
-              <input
-                type="number"
-                className="form-control"
-                placeholder="Enter weight"
-                value={weight}
-                onChange={(e) => setWeight(e.target.value)}
-              />
-              <button className="btn btn-primary" type="submit">
-                Add Weight
+    {/* Track Weight */}
+    <div className="card mt-3">
+      <div className="card-body">
+        <h2>Track Weight</h2>
+        <form onSubmit={handleAddWeight}>
+          <div className="input-group mb-3">
+            <input
+              type="number"
+              className="form-control"
+              placeholder="Enter weight"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
+            <button className="btn btn-primary" type="submit">Add Weight</button>
+          </div>
+        </form>
+        <ul className="list-group">
+          {weights.map((w) => (
+            <li key={w.id} className="list-group-item d-flex justify-content-between align-items-center">
+              {w.weight} kg
+              <button
+                className="btn btn-danger btn-sm"
+                onClick={() => handleDeleteWeight(w.id)}
+              >
+                Delete
               </button>
-            </div>
-          </form>
-          <ul className="list-group">
-            {weights.map((weight, index) => (
-              <li key={index} className="list-group-item">
-                {weight} kg
-              </li>
-            ))}
-          </ul>
-        </div>
+            </li>
+          ))}
+        </ul>
       </div>
+    </div>
 
       <div className="card mt-3">
         <div className="card-body">
@@ -391,8 +487,6 @@ const Tracker = () => {
           </ul>
         </div>
       </div>
-    </div>
-
     </div>
   );
 };
