@@ -8,7 +8,7 @@ class User(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     contacts = db.Column(db.String(64), unique=True, nullable=False)
-    address = db.Column(db.String(64), unique=True, nullable=False)
+    address = db.Column(db.String(64),nullable=False)
     password = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
 
