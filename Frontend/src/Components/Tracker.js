@@ -108,7 +108,7 @@ const Tracker = () => {
       const data = { meal, user_id: userId };
 
       try {
-        const response = await fetch('http://localhost:5500/api/trackers', {
+        const response = await fetch('https://p4-project-0gy1.onrender.com/api/trackers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -133,7 +133,7 @@ const Tracker = () => {
   // Handle deleting a meal
   const handleDeleteMeal = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+      const response = await fetch(`https://p4-project-0gy1.onrender.com/api/trackers/${id}`, {
         method: 'DELETE'
       });
 
@@ -155,7 +155,7 @@ const Tracker = () => {
       const data = { gym_visit_date: gymVisit, user_id: userId };
 
       try {
-        const response = await fetch('http://localhost:5500/api/trackers', {
+        const response = await fetch('https://p4-project-0gy1.onrender.com/api/trackers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -180,7 +180,7 @@ const Tracker = () => {
   // Handle deleting a gym visit
   const handleDeleteGymVisit = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+      const response = await fetch(`https://p4-project-0gy1.onrender.com/api/trackers/${id}`, {
         method: 'DELETE',
       
       });
@@ -203,7 +203,7 @@ const Tracker = () => {
       const data = { hours_training: parseFloat(hoursTraining), user_id: userId };
 
       try {
-        const response = await fetch('http://localhost:5500/api/trackers', {
+        const response = await fetch('https://p4-project-0gy1.onrender.com/api/trackers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -228,7 +228,7 @@ const Tracker = () => {
   // Handle deleting hours of training
   const handleDeleteHoursTraining = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+      const response = await fetch(`https://p4-project-0gy1.onrender.com/api/trackers/${id}`, {
         method: 'DELETE'
       });
 
@@ -250,7 +250,7 @@ const Tracker = () => {
       const data = { weight: parseFloat(weight), user_id: userId };
 
       try {
-        const response = await fetch('http://localhost:5500/api/trackers', {
+        const response = await fetch('https://p4-project-0gy1.onrender.com/api/trackers', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -273,7 +273,7 @@ const Tracker = () => {
 
   const handleDeleteWeight = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+      const response = await fetch(`https://p4-project-0gy1.onrender.com/api/trackers/${id}`, {
         method: 'DELETE'
       });
 
@@ -294,7 +294,7 @@ const handleAddWaterIntake = async (e) => {
     const data = { water_intake: parseFloat(waterIntake), user_id: userId };
 
     try {
-      const response = await fetch('http://localhost:5500/api/trackers', {
+      const response = await fetch('https://p4-project-0gy1.onrender.com/api/trackers', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -319,7 +319,7 @@ const handleAddWaterIntake = async (e) => {
 // Handle deleting water intake
 const handleDeleteWaterIntake = async (id) => {
   try {
-    const response = await fetch(`http://localhost:5500/api/trackers/${id}`, {
+    const response = await fetch(`https://p4-project-0gy1.onrender.com/api/trackers/${id}`, {
       method: 'DELETE'
     });
 

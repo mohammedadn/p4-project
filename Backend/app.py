@@ -7,7 +7,7 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
 app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x2a\x10K'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://fitness_tracker_app_user:vXWnrkS9mOPAmfnIQtI75ZkY2p769mhw@dpg-cqevnh0gph6c73b29kcg-a.oregon-postgres.render.com/fitness_tracker_app'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///fitness.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 migrate = Migrate(app, db)
